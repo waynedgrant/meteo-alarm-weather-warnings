@@ -9,30 +9,23 @@ class Period {
     const OUTPUT_DATE_TIME_FORMAT = 'l H:i T'; // e.g. Sunday 04:00 GMT
 
     public function __construct($period_dom, $output_timezone) {
-        // e.g. <td>From: 23.10.2017 09:00 CET Until: 24.10.2017 00:00 CET</td> or <td />
+        /* e.g. <td><b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i></td>
+             or <td /> if there is no period, i.e. when awareness level == NONE */
         $from_until_cell = $period_dom->getElementsByTagName('td')->item(0);
-        $from_until_text = $from_until_cell->textContent;
 
-        if ($from_until_text !== '') { // From/Until not present when awareness level == NONE
-            $this->parse_from_date_time($from_until_text, $output_timezone);
-            $this->parse_until_date_time($from_until_text, $output_timezone);
+        if ($from_until_cell->textContent !== '') {
+            $from_date_text = $from_until_cell->getElementsByTagName('i')->item(0)->textContent;
+            $until_date_text = $from_until_cell->getElementsByTagName('i')->item(1)->textContent;
+
+            $this->from = $this->parse_date_time($from_date_text, $output_timezone);
+            $this->until = $this->parse_date_time($until_date_text, $output_timezone);
         }
     }
 
-    private function parse_from_date_time($from_until_text, $output_timezone) {
-        // e.g. "From: 23.10.2017 09:00 CET Until: ..."
-        $from_text = substr($from_until_text, 6, strpos($from_until_text, 'Until:') - 7);
-        $from_date = date_create_from_format(self::INPUT_DATE_TIME_FORMAT, $from_text);
-        date_timezone_set($from_date, new DateTimeZone($output_timezone));
-        $this->from = $from_date->format(self::OUTPUT_DATE_TIME_FORMAT);
-    }
-
-    private function parse_until_date_time($from_until_text, $output_timezone) {
-        // e.g. "From: ... Until: 24.10.2017 00:00 CET"
-        $until_text = substr($from_until_text, strpos($from_until_text, 'Until: ') + 7);
-        $until_date = date_create_from_format(self::INPUT_DATE_TIME_FORMAT, $until_text);
-        date_timezone_set($until_date, new DateTimeZone($output_timezone));
-        $this->until = $until_date->format(self::OUTPUT_DATE_TIME_FORMAT);
+    private function parse_date_time($date_text, $output_timezone) {
+        $date = date_create_from_format(self::INPUT_DATE_TIME_FORMAT, $date_text);
+        date_timezone_set($date, new DateTimeZone($output_timezone));
+        return $date->format(self::OUTPUT_DATE_TIME_FORMAT);
     }
 
     public function from() {
