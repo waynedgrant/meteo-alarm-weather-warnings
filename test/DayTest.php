@@ -55,7 +55,7 @@ class DayTest extends PHPUnit\Framework\TestCase {
                     '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l3-t2.jpg" alt="awt:2 level:3">' .
                 '</td>' .
                 '<td>' .
-                    '<b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i>' .
+                    '<b>From: </b><i>11.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i>' .
                 '</td>' .
             '</tr>' .
             '<tr>' .
@@ -67,17 +67,17 @@ class DayTest extends PHPUnit\Framework\TestCase {
             '</tr>' .
             '<tr>' .
                 '<td width="28">' .
-                    '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l2-t1.jpg" alt="awt:1 level:2">' .
+                    '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l2-t2.jpg" alt="awt:2 level:2">' .
                 '</td>' .
                 '<td>' .
-                    '<b>From: </b><i>10.12.2017 13:00 CET</i><b> Until: </b><i>10.12.2017 18:00 CET</i>' .
+                    '<b>From: </b><i>11.12.2017 05:00 CET</i><b> Until: </b><i>12.12.2017 12:00 CET</i>' .
                 '</td>' .
             '</tr>' .
             '<tr>' .
                 '<td width="28">' .
                 '</td>' .
                 '<td>' .
-                    'Heavy winds are expected during Sunday afternoon.' .
+                    'Ice is expected to form across many places overnight into Monday morning.' .
                 '</td>' .
             '</tr>';
 
