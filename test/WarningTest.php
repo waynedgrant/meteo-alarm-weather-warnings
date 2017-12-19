@@ -10,7 +10,7 @@ class WarningTest extends PHPUnit\Framework\TestCase {
         $awarness_period_html =
             '<tr>' .
                 '<td width="28">' .
-                    '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l2-t3.jpg" alt="awt:2 level:3">' .
+                    '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l3-t2.jpg" alt="awt:2 level:3">' .
                 '</td>' .
                 '<td>' .
                     '<b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i>' .
