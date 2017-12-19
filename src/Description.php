@@ -5,16 +5,14 @@
 
 class Description {
 
-    public function __construct($description_dom) {
+    public function __construct($description_cell) {
         // e.g. <td>A spell of heavy snow is possible over parts of Scotland during Sunday.</td>
-        $description_cell = $description_dom->getElementsByTagName('td')->item(0);
-
         if ($description_cell->textContent !== '') {
-            $this->description = $description_cell->textContent;
+            $this->text = $description_cell->textContent;
         }
     }
 
-    public function description() {
-        return $this->description;
+    public function text() {
+        return $this->text;
     }
 }

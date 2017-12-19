@@ -8,14 +8,13 @@ class Period {
     const INPUT_DATE_TIME_FORMAT = 'd.m.Y H:i T'; // e.g. 10.12.2017 05:00 CET
     const OUTPUT_DATE_TIME_FORMAT = 'l H:i T'; // e.g. Sunday 04:00 GMT
 
-    public function __construct($period_dom, $output_timezone) {
+    public function __construct($period_cell, $output_timezone) {
         /* e.g. <td><b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i></td>
              or <td /> if there is no period, i.e. when awareness level == NONE */
-        $from_until_cell = $period_dom->getElementsByTagName('td')->item(0);
 
-        if ($from_until_cell->textContent !== '') {
-            $from_date_text = $from_until_cell->getElementsByTagName('i')->item(0)->textContent;
-            $until_date_text = $from_until_cell->getElementsByTagName('i')->item(1)->textContent;
+        if ($period_cell->textContent !== '') {
+            $from_date_text = $period_cell->getElementsByTagName('i')->item(0)->textContent;
+            $until_date_text = $period_cell->getElementsByTagName('i')->item(1)->textContent;
 
             $this->from = $this->parse_date_time($from_date_text, $output_timezone);
             $this->until = $this->parse_date_time($until_date_text, $output_timezone);

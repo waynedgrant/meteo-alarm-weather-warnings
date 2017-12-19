@@ -9,12 +9,14 @@ class AwarenessTest extends PHPUnit\Framework\TestCase {
 
         $awareness_html =
             '<td width="28">' .
-                '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l2-t2.jpg" alt="awt:2 level:3">' .
+                '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l3-t2.jpg" alt="awt:2 level:3">' .
             '</td>';
 
         $awareness_dom = DOMDocument::loadHTML($awareness_html);
+        $awareness_cell = $awareness_dom->getElementsByTagName('td')->item(0);
 
-        $testee = new Awareness($awareness_dom);
+        $testee = new Awareness($awareness_cell);
+
         $this->assertSame(AwarenessType::SNOW_ICE, $testee->awarenessType()->type());
         $this->assertSame(AwarenessLevel::AMBER, $testee->awarenessLevel()->level());
     }
@@ -28,8 +30,10 @@ class AwarenessTest extends PHPUnit\Framework\TestCase {
             '</td>';
 
         $awareness_dom = DOMDocument::loadHTML($awareness_html);
+        $awareness_cell = $awareness_dom->getElementsByTagName('td')->item(0);
 
-        $testee = new Awareness($awareness_dom);
+        $testee = new Awareness($awareness_cell);
+
         $this->assertSame(AwarenessType::NONE, $testee->awarenessType()->type());
         $this->assertSame(AwarenessLevel::GREEN, $testee->awarenessLevel()->level());
     }

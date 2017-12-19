@@ -5,9 +5,9 @@
 
 class Awareness {
 
-    public function __construct($awareness_dom) {
+    public function __construct($awareness_cell) {
         // e.g. <td><img src="..." alt="awt:4 level:3"></td>
-        $img_alt = $awareness_dom->getElementsByTagName('img')->item(0)->getAttribute('alt');
+        $img_alt = $awareness_cell->getElementsByTagName('img')->item(0)->getAttribute('alt');
         $this->parse_awareness_level($img_alt);
         $this->parse_awareness_type($img_alt);
     }

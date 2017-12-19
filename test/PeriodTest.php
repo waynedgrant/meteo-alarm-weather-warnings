@@ -13,8 +13,10 @@ class PeriodTest extends PHPUnit\Framework\TestCase {
             '</td>';
 
         $period_dom = DOMDocument::loadHTML($period_html);
+        $period_cell = $period_dom->getElementsByTagName('td')->item(0);
 
-        $testee = new Period($period_dom, 'Europe/London');
+        $testee = new Period($period_cell, 'Europe/London');
+
         $this->assertSame('Sunday 04:00 GMT', $testee->from());
         $this->assertSame('Sunday 23:55 GMT', $testee->until());
     }
@@ -24,8 +26,10 @@ class PeriodTest extends PHPUnit\Framework\TestCase {
         $period_html = '<td width="28"></td>';
 
         $period_dom = DOMDocument::loadHTML($period_html);
+        $period_cell = $period_dom->getElementsByTagName('td')->item(0);
 
-        $testee = new Period($period_dom, 'Europe/London');
+        $testee = new Period($period_cell, 'Europe/London');
+
         $this->assertNull($testee->from());
         $this->assertNull($testee->until());
     }
