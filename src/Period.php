@@ -12,16 +12,16 @@ class Period {
         /* e.g. <td><b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i></td>
              or <td /> if there is no period, i.e. when awareness level == NONE */
 
-        if ($period_cell->textContent !== '') {
+        if (trim($period_cell->textContent) !== '') {
             $from_date_text = $period_cell->getElementsByTagName('i')->item(0)->textContent;
             $until_date_text = $period_cell->getElementsByTagName('i')->item(1)->textContent;
 
-            $this->from = $this->parse_date_time($from_date_text, $output_timezone);
-            $this->until = $this->parse_date_time($until_date_text, $output_timezone);
+            $this->from = $this->parseDateTime($from_date_text, $output_timezone);
+            $this->until = $this->parseDateTime($until_date_text, $output_timezone);
         }
     }
 
-    private function parse_date_time($date_text, $output_timezone) {
+    private function parseDateTime($date_text, $output_timezone) {
         $date = date_create_from_format(self::INPUT_DATE_TIME_FORMAT, $date_text);
         date_timezone_set($date, new DateTimeZone($output_timezone));
         return $date->format(self::OUTPUT_DATE_TIME_FORMAT);

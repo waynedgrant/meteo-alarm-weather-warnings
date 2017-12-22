@@ -6,7 +6,6 @@
 class PeriodTest extends PHPUnit\Framework\TestCase {
 
     public function test_period_present() {
-
         $period_html =
             '<td>' .
                 '<b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i>' .
@@ -22,7 +21,6 @@ class PeriodTest extends PHPUnit\Framework\TestCase {
     }
 
     public function test_no_period_present() {
-
         $period_html = '<td width="28"></td>';
 
         $period_dom = DOMDocument::loadHTML($period_html);

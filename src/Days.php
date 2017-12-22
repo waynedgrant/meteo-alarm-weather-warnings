@@ -5,24 +5,26 @@
 
 class Days {
 
-    public function __construct($days_dom, $output_timezone) {
-        /* e.g. <table>
-                    <tr><th>Today</th></tr>
-                    <tr><!-- Today's 1st warning awareness/period --></tr>
-                    <tr><!-- Today's 1st warning description --></tr>
-                    ...
-                    <tr><!-- Today's nth warning awareness/period --></tr>
-                    <tr><!-- Today's nth warning description --></tr>
+    public function __construct($days_table, $output_timezone) {
+        /* e.g.
+            <table>
+                <tr><th>Today</th></tr>
+                <tr><!-- Today's 1st warning awareness/period --></tr>
+                <tr><!-- Today's 1st warning description --></tr>
+                ...
+                <tr><!-- Today's nth warning awareness/period --></tr>
+                <tr><!-- Today's nth warning description --></tr>
 
-                    <tr><th>Tomorrow</th></tr>
-                    <tr><!-- Tomorrow's 1st warning awareness/period --></tr>
-                    <tr><!-- Tomorrow's 1st warning description --></tr>
-                    ...
-                    <tr><!-- Tomorrow's nth warning awareness/period --></tr>
-                    <tr><!-- Tomorrow's nth warning description --></tr>
-                </table>
+                <tr><th>Tomorrow</th></tr>
+                <tr><!-- Tomorrow's 1st warning awareness/period --></tr>
+                <tr><!-- Tomorrow's 1st warning description --></tr>
+                ...
+                <tr><!-- Tomorrow's nth warning awareness/period --></tr>
+                <tr><!-- Tomorrow's nth warning description --></tr>
+            </table>
         */
-        $rows = $days_dom->getElementsByTagName('tr');
+
+        $rows = $days_table->getElementsByTagName('tr');
         $tomorrows_row_index = $this->findTomorrowsRowIndex($rows);
 
         $this->todaysWarnings = $this->parseWarningsFromRows($rows, 1, $tomorrows_row_index, $output_timezone);
