@@ -5,7 +5,6 @@
 
 require_once("Country.php");
 require_once("Region.php");
-require_once("Days.php");
 require_once("Warning.php");
 require_once("Awareness.php");
 require_once("AwarenessLevel.php");
