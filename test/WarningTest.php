@@ -6,7 +6,6 @@
 class WarningTest extends PHPUnit\Framework\TestCase {
 
     public function test_warning() {
-
         $awarness_period_html =
             '<tr>' .
                 '<td width="28">' .
@@ -33,12 +32,13 @@ class WarningTest extends PHPUnit\Framework\TestCase {
         $description_row = $description_dom->getElementsByTagName('tr')->item(0);
 
         $testee = new Warning($awarness_period_row, $description_row, 'Europe/London');
+        $serialized = $testee->serialize();
 
-        $this->assertSame(AwarenessType::SNOW_ICE, $testee->awareness()->awarenessType()->type());
-        $this->assertSame(AwarenessLevel::AMBER, $testee->awareness()->awarenessLevel()->level());
-        $this->assertSame('Sunday 04:00 GMT', $testee->period()->from());
-        $this->assertSame('Sunday 23:55 GMT', $testee->period()->until());
-        $this->assertSame('A spell of heavy snow is possible over parts of Scotland during Sunday.', $testee->description()->text());
+        $this->assertSame(AwarenessType::SNOW_ICE, $serialized['awareness']['awareness_type']['type']);
+        $this->assertSame(AwarenessLevel::AMBER, $serialized['awareness']['awareness_level']['level']);
+        $this->assertSame('Sunday 04:00 GMT', $serialized['period']['from']);
+        $this->assertSame('Sunday 23:55 GMT', $serialized['period']['until']);
+        $this->assertSame('A spell of heavy snow is possible over parts of Scotland during Sunday.', $serialized['description']);
     }
 }
 

@@ -7,100 +7,114 @@ class AwarenessTypeTest extends PHPUnit\Framework\TestCase {
 
     public function test_none() {
         $testee = new AwarenessType(AwarenessType::NONE);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(0, $testee->type());
-        $this->assertSame("None", $testee->description());
+        $this->assertSame(0, $serialized['type']);
+        $this->assertSame("None", $serialized['description']);
     }
 
     public function test_wind() {
         $testee = new AwarenessType(AwarenessType::WIND);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(1, $testee->type());
-        $this->assertSame("Wind", $testee->description());
+        $this->assertSame(1, $serialized['type']);
+        $this->assertSame("Wind", $serialized['description']);
     }
 
     public function test_snow_ice() {
         $testee = new AwarenessType(AwarenessType::SNOW_ICE);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(2, $testee->type());
-        $this->assertSame("Snow/Ice", $testee->description());
+        $this->assertSame(2, $serialized['type']);
+        $this->assertSame("Snow/Ice", $serialized['description']);
     }
 
     public function test_thunderstorms() {
         $testee = new AwarenessType(AwarenessType::THUNDERSTORMS);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(3, $testee->type());
-        $this->assertSame("Thunderstorms", $testee->description());
+        $this->assertSame(3, $serialized['type']);
+        $this->assertSame("Thunderstorms", $serialized['description']);
     }
 
     public function test_fog() {
         $testee = new AwarenessType(AwarenessType::FOG);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(4, $testee->type());
-        $this->assertSame("Fog", $testee->description());
+        $this->assertSame(4, $serialized['type']);
+        $this->assertSame("Fog", $serialized['description']);
     }
 
     public function test_extreme_high_temperatures() {
         $testee = new AwarenessType(AwarenessType::EXTREME_HIGH_TEMPERATURES);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(5, $testee->type());
-        $this->assertSame("Extreme High Temperatures", $testee->description());
+        $this->assertSame(5, $serialized['type']);
+        $this->assertSame("Extreme High Temperatures", $serialized['description']);
     }
 
     public function test_extreme_low_temperatures() {
         $testee = new AwarenessType(AwarenessType::EXTREME_LOW_TEMPERATURES);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(6, $testee->type());
-        $this->assertSame("Extreme Low Temperatures", $testee->description());
+        $this->assertSame(6, $serialized['type']);
+        $this->assertSame("Extreme Low Temperatures", $serialized['description']);
     }
 
     public function test_coastal_event() {
         $testee = new AwarenessType(AwarenessType::COASTAL_EVENT);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(7, $testee->type());
-        $this->assertSame("Costal Event", $testee->description());
+        $this->assertSame(7, $serialized['type']);
+        $this->assertSame("Costal Event", $serialized['description']);
     }
 
     public function test_forest_fire() {
         $testee = new AwarenessType(AwarenessType::FOREST_FIRE);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(8, $testee->type());
-        $this->assertSame("Forest Fire", $testee->description());
+        $this->assertSame(8, $serialized['type']);
+        $this->assertSame("Forest Fire", $serialized['description']);
     }
 
     public function test_avalanche() {
         $testee = new AwarenessType(AwarenessType::AVALANCHE);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(9, $testee->type());
-        $this->assertSame("Avalanche", $testee->description());
+        $this->assertSame(9, $serialized['type']);
+        $this->assertSame("Avalanche", $serialized['description']);
     }
 
     public function test_rain() {
         $testee = new AwarenessType(AwarenessType::RAIN);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(10, $testee->type());
-        $this->assertSame("Rain", $testee->description());
+        $this->assertSame(10, $serialized['type']);
+        $this->assertSame("Rain", $serialized['description']);
     }
 
     public function test_unavailable() {
         $testee = new AwarenessType(AwarenessType::UNAVAILABLE);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(11, $testee->type());
-        $this->assertSame("Unavailable", $testee->description());
+        $this->assertSame(11, $serialized['type']);
+        $this->assertSame("Unavailable", $serialized['description']);
     }
 
     public function test_flooding() {
         $testee = new AwarenessType(AwarenessType::FLOODING);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(12, $testee->type());
-        $this->assertSame("Flooding", $testee->description());
+        $this->assertSame(12, $serialized['type']);
+        $this->assertSame("Flooding", $serialized['description']);
     }
 
     public function test_rain_flooding() {
         $testee = new AwarenessType(AwarenessType::RAIN_FLOODING);
+        $serialized = $testee->serialize();
 
-        $this->assertSame(13, $testee->type());
-        $this->assertSame("Rain/Flooding", $testee->description());
+        $this->assertSame(13, $serialized['type']);
+        $this->assertSame("Rain/Flooding", $serialized['description']);
     }
 
     public function test_invalid_low_type() {

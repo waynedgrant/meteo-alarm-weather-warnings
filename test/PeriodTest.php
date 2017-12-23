@@ -15,9 +15,10 @@ class PeriodTest extends PHPUnit\Framework\TestCase {
         $period_cell = $period_dom->getElementsByTagName('td')->item(0);
 
         $testee = new Period($period_cell, 'Europe/London');
+        $serialized = $testee->serialize();
 
-        $this->assertSame('Sunday 04:00 GMT', $testee->from());
-        $this->assertSame('Sunday 23:55 GMT', $testee->until());
+        $this->assertSame('Sunday 04:00 GMT', $serialized['from']);
+        $this->assertSame('Sunday 23:55 GMT', $serialized['until']);
     }
 
     public function test_no_period_present() {
@@ -27,9 +28,10 @@ class PeriodTest extends PHPUnit\Framework\TestCase {
         $period_cell = $period_dom->getElementsByTagName('td')->item(0);
 
         $testee = new Period($period_cell, 'Europe/London');
+        $serialized = $testee->serialize();
 
-        $this->assertNull($testee->from());
-        $this->assertNull($testee->until());
+        $this->assertNull($serialized['from']);
+        $this->assertNull($serialized['until']);
     }
 }
 

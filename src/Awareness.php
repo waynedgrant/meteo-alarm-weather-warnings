@@ -20,8 +20,8 @@ class Awareness {
     }
 
     private function parse_awareness_type($img_alt) {
-        if ($this->awarenessLevel->level() == AwarenessLevel::GREEN) {
-            $this->awarenessType = new AwarenessType(AwarenessType::NONE); // Awareness types need to be corrected when level is green
+        if ($this->awarenessLevel->serialize()['level'] == AwarenessLevel::GREEN) {
+            $this->awarenessType = new AwarenessType(AwarenessType::NONE); // Awareness types need to be corrected to be 'none' when level is green
         } else {
             // e.g. awt value from "awt:4 level:3"
             $start_awareness_type_index = strpos($img_alt, ':') + 1;
@@ -30,12 +30,11 @@ class Awareness {
         }
     }
 
-    public function awarenessType() {
-        return $this->awarenessType;
-    }
-
-    public function awarenessLevel() {
-        return $this->awarenessLevel;
+    public function serialize() {
+        return [
+            'awareness_type' => $this->awarenessType->serialize(),
+            'awareness_level' => $this->awarenessLevel->serialize()
+        ];
     }
 }
 

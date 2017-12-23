@@ -30,23 +30,21 @@ class Region {
         $this->published = $parsed_pub_date->format(self::OUTPUT_DATE_TIME_FORMAT);
     }
 
-    public function name() {
-        return $this->name;
-    }
+    public function serialize() {
+        foreach ($this->days->todaysWarnings() as $warning) {
+            $todaysWarnings[] = $warning->serialize();
+        }
 
-    public function link() {
-        return $this->link;
-    }
+        foreach ($this->days->tomorrowsWarnings() as $warning) {
+            $tomorrowsWarnings[] = $warning->serialize();
+        }
 
-    public function today() {
-        return $this->days->todaysWarnings();
-    }
-
-    public function tomorrow() {
-        return $this->days->tomorrowsWarnings();
-    }
-
-    public function published() {
-        return $this->published;
+        return [
+            'name' => $this->name,
+            'link' => $this->link,
+            'today' => $todaysWarnings,
+            'tomorrow' => $tomorrowsWarnings,
+            'published' => $this->published
+        ];
     }
 }

@@ -41,7 +41,6 @@ class AwarenessType {
     private $description;
 
     public function __construct($type) {
-
         if ($type < 0 or $type >= sizeof($this->descriptions)) {
             throw new InvalidArgumentException('Awareness type ' . $type . ' is not supported.');
         }
@@ -50,12 +49,11 @@ class AwarenessType {
         $this->description = $this->descriptions[$type];
     }
 
-    public function type() {
-        return $this->type;
-    }
-
-    public function description() {
-        return $this->description;
+    public function serialize() {
+        return [
+            'type' => $this->type,
+            'description' => $this->description
+        ];
     }
 }
 

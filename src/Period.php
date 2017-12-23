@@ -27,12 +27,11 @@ class Period {
         return $date->format(self::OUTPUT_DATE_TIME_FORMAT);
     }
 
-    public function from() {
-        return $this->from;
-    }
-
-    public function until() {
-        return $this->until;
+    public function serialize() {
+        return [
+            'from' => $this->from,
+            'until' => $this->until
+        ];
     }
 }
 

@@ -18,15 +18,11 @@ class Warning {
         $this->description = new Description($description_cell);
     }
 
-    public function awareness() {
-        return $this->awareness;
-    }
-
-    public function period() {
-        return $this->period;
-    }
-
-    public function description() {
-        return $this->description;
+    public function serialize() {
+        return [
+            'awareness' => $this->awareness->serialize(),
+            'period' => $this->period->serialize(),
+            'description' => $this->description->text
+        ];
     }
 }

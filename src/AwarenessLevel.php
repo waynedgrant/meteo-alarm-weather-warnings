@@ -25,7 +25,6 @@ class AwarenessLevel {
     private $description;
 
     public function __construct($level) {
-
         if ($level < 0 or $level >= sizeof($this->colours)) {
             throw new InvalidArgumentException('Awareness level ' . $level . ' is not supported.');
         }
@@ -35,16 +34,12 @@ class AwarenessLevel {
         $this->description = $this->descriptions[$level];
     }
 
-    public function level() {
-        return $this->level;
-    }
-
-    public function colour() {
-        return $this->colour;
-    }
-
-    public function description() {
-        return $this->description;
+    public function serialize() {
+        return [
+            'level' => $this->level,
+            'colour' => $this->colour,
+            'description' => $this->description
+        ];
     }
 }
 

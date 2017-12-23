@@ -18,12 +18,13 @@ class RegionTest extends PHPUnit\Framework\TestCase {
         $rss_item = simplexml_load_string($item_xml);
 
         $testee = new Region($rss_item, 'Europe/London');
+        $serialized = $testee->serialize();
 
-        $this->assertSame('Lothian & Borders', $testee->name());
-        $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK004.html', $testee->link());
-        $this->assertSame(1, sizeof($testee->today()));
-        $this->assertSame(1, sizeof($testee->tomorrow()));
-        $this->assertSame('Friday 00:00 GMT', $testee->published());
+        $this->assertSame('Lothian & Borders', $serialized['name']);
+        $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK004.html', $serialized['link']);
+        $this->assertSame(1, sizeof($serialized['today']));
+        $this->assertSame(1, sizeof($serialized['tomorrow']));
+        $this->assertSame('Friday 00:00 GMT', $serialized['published']);
     }
 }
 
