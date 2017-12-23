@@ -1,0 +1,32 @@
+<?php header('content-type: application/json; charset=utf-8');
+
+# Copyright 2016 Wayne D Grant (www.waynedgrant.com)
+# Licensed under the MIT License
+
+require_once("Country.php");
+require_once("Region.php");
+require_once("Days.php");
+require_once("Warning.php");
+require_once("Awareness.php");
+require_once("AwarenessLevel.php");
+require_once("AwarenessType.php");
+require_once("Period.php");
+require_once("Description.php");
+
+define('TIMEZONE', 'Europe/London'); // TODO - Make this a param, perhaps optional?
+
+if (!isset($_GET['country'])) { // TODO - more informative error reporting
+    http_response_code(400);
+    die();
+}
+
+$rss_link = 'http://www.meteoalarm.eu/documents/rss/' . strtolower($_GET['country']) . '.rss';
+
+$rss = file_get_contents($rss_link);
+$country = new Country(simplexml_load_string($rss), TIMEZONE);
+
+$json = json_encode($country->serialize());
+
+echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
+
+?>
