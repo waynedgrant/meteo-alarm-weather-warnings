@@ -20,10 +20,6 @@ class AwarenessLevel {
         'The weather is very dangerous. Exceptionally intense meteorological phenomena have been forecast. Major damage and accidents are likely, in many cases with threat to life and limb, over a wide area. Keep frequently informed about detailed expected meteorological conditions and risks. Follow orders and any advice given by your authorities under all circumstances, be prepared for extraordinary measures.'
     ];
 
-    private $level;
-    private $colour;
-    private $description;
-
     public function __construct($level) {
         if ($level < 0 or $level >= sizeof($this->colours)) {
             throw new InvalidArgumentException('Awareness level ' . $level . ' is not supported.');

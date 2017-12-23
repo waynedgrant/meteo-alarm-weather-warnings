@@ -37,9 +37,6 @@ class AwarenessType {
         'Rain/Flooding'
     ];
 
-    private $type;
-    private $description;
-
     public function __construct($type) {
         if ($type < 0 or $type >= sizeof($this->descriptions)) {
             throw new InvalidArgumentException('Awareness type ' . $type . ' is not supported.');
