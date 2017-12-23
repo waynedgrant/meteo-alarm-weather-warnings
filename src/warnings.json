@@ -30,10 +30,10 @@ function generate_rss_link() {
     $country = $_GET['country'];
 
     if (isset($_GET['region'])) {
-        // e.g. http://meteoalarm.eu/documents/rss/uk/UK004.rss
+        // Request for a single region, e.g. http://meteoalarm.eu/documents/rss/uk/UK004.rss
         return 'http://meteoalarm.eu/documents/rss/' . strtolower($country) . '/' . strtoupper($country) . $_GET['region'] . '.rss';
     } else {
-        // http://www.meteoalarm.eu/documents/rss/uk.rss
+        // Request for an entire country, e.g. http://www.meteoalarm.eu/documents/rss/uk.rss
         return 'http://www.meteoalarm.eu/documents/rss/' . strtolower($country) . '.rss';
     }
 
