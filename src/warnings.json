@@ -3,7 +3,7 @@
 # Copyright 2016 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-require_once("Country.php");
+require_once("Warnings.php");
 require_once("Region.php");
 require_once("Warning.php");
 require_once("Awareness.php");
@@ -19,13 +19,32 @@ if (!isset($_GET['country'])) { // TODO - more informative error reporting
     die();
 }
 
-$rss_link = 'http://www.meteoalarm.eu/documents/rss/' . strtolower($_GET['country']) . '.rss';
+$rss = fix_rss_ampersand_escaping(file_get_contents(generate_rss_link()));
+$warnings = new Warnings(simplexml_load_string($rss), OUTPUT_TIMEZONE);
 
-$rss = file_get_contents($rss_link);
-$country = new Country(simplexml_load_string($rss), OUTPUT_TIMEZONE);
-
-$json = json_encode($country->serialize());
+$json = json_encode($warnings->serialize());
 
 echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
+
+function generate_rss_link() {
+    $country = $_GET['country'];
+
+    if (isset($_GET['region'])) {
+        // e.g. http://meteoalarm.eu/documents/rss/uk/UK004.rss
+        return 'http://meteoalarm.eu/documents/rss/' . strtolower($country) . '/' . strtoupper($country) . $_GET['region'] . '.rss';
+    } else {
+        // http://www.meteoalarm.eu/documents/rss/uk.rss
+        return 'http://www.meteoalarm.eu/documents/rss/' . strtolower($country) . '.rss';
+    }
+
+}
+
+function fix_rss_ampersand_escaping($rss) {
+    /* Some ampersands are escaped in the received RSS and some are not.
+       Address this by escaping them and then fixing any resultant double escapes */
+    $rss = str_replace('&', '&amp;', $rss);
+    $rss = str_replace('&amp;amp;', '&amp;', $rss);
+    return $rss;
+}
 
 ?>

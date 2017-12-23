@@ -3,7 +3,7 @@
 # Copyright 2018 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-class Country {
+class Warnings {
 
     public function __construct($rss, $output_timezone) {
         /* e.g.
@@ -28,10 +28,14 @@ class Country {
         $rss_channel = $rss->channel;
         $this->link = (string)$rss_channel->link;
 
-        for ($i=0; $i < count($rss_channel->item); $i++) {
-            if ($i !== 0) {
-                $this->regions[] = new Region($rss_channel->item[$i], $output_timezone);
+        if (count($rss_channel->item) > 1) { // Mutiple items == warnings for each region in a country
+            for ($i=0; $i < count($rss_channel->item); $i++) {
+                if ($i !== 0) { // Drop the first item which is actually for the entire country
+                    $this->regions[] = new Region($rss_channel->item[$i], $output_timezone);
+                }
             }
+        } else { // Single item == warning for a single region
+            $this->regions[] = new Region($rss_channel->item, $output_timezone);
         }
     }
 
