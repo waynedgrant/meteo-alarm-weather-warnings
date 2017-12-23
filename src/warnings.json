@@ -12,7 +12,7 @@ require_once("AwarenessType.php");
 require_once("Period.php");
 require_once("Description.php");
 
-define('TIMEZONE', 'Europe/London'); // TODO - Make this a param, perhaps optional?
+define('OUTPUT_TIMEZONE', 'Europe/London'); // TODO - Make this a param, perhaps optional?
 
 if (!isset($_GET['country'])) { // TODO - more informative error reporting
     http_response_code(400);
@@ -22,7 +22,7 @@ if (!isset($_GET['country'])) { // TODO - more informative error reporting
 $rss_link = 'http://www.meteoalarm.eu/documents/rss/' . strtolower($_GET['country']) . '.rss';
 
 $rss = file_get_contents($rss_link);
-$country = new Country(simplexml_load_string($rss), TIMEZONE);
+$country = new Country(simplexml_load_string($rss), OUTPUT_TIMEZONE);
 
 $json = json_encode($country->serialize());
 
