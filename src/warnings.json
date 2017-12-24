@@ -26,7 +26,7 @@ function parse_parameters() {
         die();
     }
 
-    Config::setCountry($_GET['country']);
+    Config::setCountry(strtoupper($_GET['country']));
 
     if (isset($_GET['region'])) {
         Config::setRegion($_GET['region']);
@@ -44,7 +44,7 @@ function parse_parameters() {
 function generate_rss_link() {
     if (!is_null(Config::getRegion())) {
         // Request for a single region, e.g. http://meteoalarm.eu/documents/rss/uk/UK004.rss
-        return sprintf('http://meteoalarm.eu/documents/rss/%s/%s%s.rss', strtolower(Config::getCountry()), strtoupper(Config::getCountry()), Config::getRegion());
+        return sprintf('http://meteoalarm.eu/documents/rss/%s/%s%s.rss', strtolower(Config::getCountry()), Config::getCountry(), Config::getRegion());
     } else {
         // Request for an entire country, e.g. http://www.meteoalarm.eu/documents/rss/uk.rss
         return sprintf('http://www.meteoalarm.eu/documents/rss/%s.rss', strtolower(Config::getCountry()));
