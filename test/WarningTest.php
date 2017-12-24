@@ -5,6 +5,11 @@
 
 class WarningTest extends PHPUnit\Framework\TestCase {
 
+    protected function setUp() {
+        Config::setDateTimeFormat('l H:i T');
+        Config::setTimezone('Europe/London');
+    }
+
     public function test_warning() {
         $awarness_period_html =
             '<tr>' .
@@ -31,7 +36,7 @@ class WarningTest extends PHPUnit\Framework\TestCase {
         $description_dom = DOMDocument::loadHTML($description_html);
         $description_row = $description_dom->getElementsByTagName('tr')->item(0);
 
-        $testee = new Warning($awarness_period_row, $description_row, 'Europe/London');
+        $testee = new Warning($awarness_period_row, $description_row);
         $serialized = $testee->serialize();
 
         $this->assertSame(AwarenessType::SNOW_ICE, $serialized['awareness']['awareness_type']['type']);

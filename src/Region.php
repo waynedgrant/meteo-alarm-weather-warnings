@@ -5,10 +5,9 @@
 
 class Region {
 
-    const INPUT_DATE_TIME_FORMAT = 'D, d M Y H:i:s T'; // e.g. Fri, 22 Dec 2017 01:00:00 +0100
-    const OUTPUT_DATE_TIME_FORMAT = 'l H:i T'; // e.g. Friday 00:00 GMT
+    const DATE_TIME_FORMAT = 'D, d M Y H:i:s T'; // e.g. Fri, 22 Dec 2017 01:00:00 +0100
 
-    public function __construct($rss_item, $output_timezone) {
+    public function __construct($rss_item) {
         /* e.g.
     		<item>
                 <title>Lothian &amp; Borders</title>
@@ -23,14 +22,14 @@ class Region {
 
         $description_html = (string)$rss_item->description;
 
-        $this->parseWarningsFromDescription($description_html, 'Europe/London');
+        $this->parseWarningsFromDescription($description_html);
 
-        $parsed_pub_date = date_create_from_format(self::INPUT_DATE_TIME_FORMAT, (string)$rss_item->pubDate);
-        date_timezone_set($parsed_pub_date, new DateTimeZone($output_timezone));
-        $this->published = $parsed_pub_date->format(self::OUTPUT_DATE_TIME_FORMAT);
+        $parsed_pub_date = date_create_from_format(self::DATE_TIME_FORMAT, (string)$rss_item->pubDate);
+        date_timezone_set($parsed_pub_date, new DateTimeZone(Config::getTimeZone()));
+        $this->published = $parsed_pub_date->format(Config::getDateTimeFormat());
     }
 
-    private function parseWarningsFromDescription($description_html, $output_timezone) {
+    private function parseWarningsFromDescription($description_html) {
         /* e.g.
             <table>
                 <tr><th>Today</th></tr>
@@ -54,8 +53,8 @@ class Region {
         $rows = $description_dom->getElementsByTagName('tr');
         $tomorrows_row_index = $this->findTomorrowsRowIndex($rows);
 
-        $this->todaysWarnings = $this->parseWarningsFromRows($rows, 1, $tomorrows_row_index, $output_timezone);
-        $this->tomorrowsWarnings = $this->parseWarningsFromRows($rows, $tomorrows_row_index+1, $rows->length, $output_timezone);
+        $this->todaysWarnings = $this->parseWarningsFromRows($rows, 1, $tomorrows_row_index);
+        $this->tomorrowsWarnings = $this->parseWarningsFromRows($rows, $tomorrows_row_index+1, $rows->length);
     }
 
     private function findTomorrowsRowIndex($rows) {
@@ -74,13 +73,13 @@ class Region {
         return $tomorrows_row_index;
     }
 
-    private function parseWarningsFromRows($rows, $start_index, $end_index, $output_timezone) {
+    private function parseWarningsFromRows($rows, $start_index, $end_index) {
         $warnings = array();
 
         for ($i = $start_index; ($i + 2) <= $end_index; $i+=2) {
             $awarness_period_row = $rows->item($i);
             $description_row = $rows->item($i+1);
-            $warnings[] = new Warning($awarness_period_row, $description_row, $output_timezone);
+            $warnings[] = new Warning($awarness_period_row, $description_row);
         }
 
         return $warnings;

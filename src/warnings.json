@@ -1,8 +1,9 @@
 <?php header('content-type: application/json; charset=utf-8');
 
-# Copyright 2016 Wayne D Grant (www.waynedgrant.com)
+# Copyright 2018 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
+require_once("Config.php");
 require_once("Warnings.php");
 require_once("Region.php");
 require_once("Warning.php");
@@ -12,36 +13,48 @@ require_once("AwarenessType.php");
 require_once("Period.php");
 require_once("Description.php");
 
-define('OUTPUT_TIMEZONE', 'Europe/London'); // TODO - Make this a param, perhaps optional?
-
-if (!isset($_GET['country'])) { // TODO - more informative error reporting
-    http_response_code(400);
-    die();
-}
-
-$rss = fix_rss_ampersand_escaping(file_get_contents(generate_rss_link()));
-$warnings = new Warnings(simplexml_load_string($rss), OUTPUT_TIMEZONE);
-
+parse_parameters();
+print('"' . Config::getRegion() . '"');
+$rss = fix_rss_ampersand_escaping(file_get_contents(generate_rss_link())); // TODO check for HTTP errors from file_get_contents
+$warnings = new Warnings(simplexml_load_string($rss));
 $json = json_encode($warnings->serialize());
 
 echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
 
-function generate_rss_link() {
-    $country = $_GET['country'];
-
-    if (isset($_GET['region'])) {
-        // Request for a single region, e.g. http://meteoalarm.eu/documents/rss/uk/UK004.rss
-        return 'http://meteoalarm.eu/documents/rss/' . strtolower($country) . '/' . strtoupper($country) . $_GET['region'] . '.rss';
-    } else {
-        // Request for an entire country, e.g. http://www.meteoalarm.eu/documents/rss/uk.rss
-        return 'http://www.meteoalarm.eu/documents/rss/' . strtolower($country) . '.rss';
+function parse_parameters() {
+    if (!isset($_GET['country'])) { // TODO - more informative error reporting
+        http_response_code(400);
+        die();
     }
 
+    Config::setCountry($_GET['country']);
+
+    if (isset($_GET['region'])) {
+        Config::setRegion($_GET['region']);
+    }
+
+    if (isset($_GET['date_time_format'])) {
+        Config::setDateTimeFormat($_GET['date_time_format']);
+    }
+
+    if (isset($_GET['time_zone'])) {
+        Config::setTimeZone($_GET['time_zone']);
+    }
+}
+
+function generate_rss_link() {
+    if (!is_null(Config::getRegion())) {
+        // Request for a single region, e.g. http://meteoalarm.eu/documents/rss/uk/UK004.rss
+        return sprintf('http://meteoalarm.eu/documents/rss/%s/%s%s.rss', strtolower(Config::getCountry()), strtoupper(Config::getCountry()), Config::getRegion());
+    } else {
+        // Request for an entire country, e.g. http://www.meteoalarm.eu/documents/rss/uk.rss
+        return sprintf('http://www.meteoalarm.eu/documents/rss/%s.rss', strtolower(Config::getCountry()));
+    }
 }
 
 function fix_rss_ampersand_escaping($rss) {
     /* Some ampersands are escaped in the received RSS and some are not.
-       Address this by escaping them and then fixing any resultant double escapes */
+       Address this by escaping them all and then fixing any resultant double escapes */
     $rss = str_replace('&', '&amp;', $rss);
     $rss = str_replace('&amp;amp;', '&amp;', $rss);
     return $rss;

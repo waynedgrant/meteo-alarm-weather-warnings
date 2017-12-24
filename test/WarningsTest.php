@@ -42,7 +42,7 @@ class WarningsTest extends PHPUnit\Framework\TestCase {
 
         $rss = simplexml_load_string($rss_xml);
 
-        $testee = new Warnings($rss, 'Europe/London');
+        $testee = new Warnings($rss);
         $serialized = $testee->serialize();
 
         $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK.html', $serialized['link']);
@@ -74,7 +74,7 @@ class WarningsTest extends PHPUnit\Framework\TestCase {
 
         $rss = simplexml_load_string($rss_xml);
 
-        $testee = new Warnings($rss, 'Europe/London');
+        $testee = new Warnings($rss);
         $serialized = $testee->serialize();
 
         $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK002.html', $serialized['link']);

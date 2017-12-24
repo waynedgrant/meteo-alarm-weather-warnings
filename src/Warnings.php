@@ -5,7 +5,7 @@
 
 class Warnings {
 
-    public function __construct($rss, $output_timezone) {
+    public function __construct($rss) {
         /* e.g.
             <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
             	<channel>
@@ -31,11 +31,11 @@ class Warnings {
         if (count($rss_channel->item) > 1) { // Mutiple items == warnings for each region in a country
             for ($i=0; $i < count($rss_channel->item); $i++) {
                 if ($i !== 0) { // Drop the first item which is actually for the entire country
-                    $this->regions[] = new Region($rss_channel->item[$i], $output_timezone);
+                    $this->regions[] = new Region($rss_channel->item[$i]);
                 }
             }
         } else { // Single item == warning for a single region
-            $this->regions[] = new Region($rss_channel->item, $output_timezone);
+            $this->regions[] = new Region($rss_channel->item);
         }
     }
 
