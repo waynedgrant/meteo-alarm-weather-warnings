@@ -19,6 +19,7 @@ class Region {
 
         $this->name = (string)$rss_item->title;
         $this->link = (string)$rss_item->link;
+        $this->code = $this->parseRegionCodeFromLink();
 
         $description_html = (string)$rss_item->description;
 
@@ -27,6 +28,14 @@ class Region {
         $parsed_pub_date = date_create_from_format(self::DATE_TIME_FORMAT, (string)$rss_item->pubDate);
         date_timezone_set($parsed_pub_date, new DateTimeZone(Config::getTimeZone()));
         $this->published = $parsed_pub_date->format(Config::getDateTimeFormat());
+    }
+
+    private function parseRegionCodeFromLink() {
+        // e.g. extract '004' from http://web.meteoalarm.eu/en_UK/0/0/UK004.html
+        $start = strripos($this->link, Config::getCountry()) + strlen(Config::getCountry());
+        $length = strripos($this->link, '.html') - $start;
+
+        return substr($this->link, $start, $length);
     }
 
     private function parseWarningsFromDescription($description_html) {
@@ -96,6 +105,7 @@ class Region {
 
         return [
             'name' => $this->name,
+            'code' => $this->code,
             'link' => $this->link,
             'today' => $todaysWarnings,
             'tomorrow' => $tomorrowsWarnings,

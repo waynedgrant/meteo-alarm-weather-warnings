@@ -65,6 +65,7 @@ class RegionTest extends PHPUnit\Framework\TestCase {
         '</table>';
 
     protected function setUp() {
+        Config::setCountry('UK');
         Config::setDateTimeFormat('l H:i T');
         Config::setTimezone('Europe/London');
     }
@@ -84,6 +85,7 @@ class RegionTest extends PHPUnit\Framework\TestCase {
         $testee = new Region($rss_item);
         $serialized = $testee->serialize();
 
+        $this->assertSame('004', $serialized['code']);
         $this->assertSame('Lothian & Borders', $serialized['name']);
         $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK004.html', $serialized['link']);
 
