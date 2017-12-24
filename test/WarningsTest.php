@@ -5,6 +5,10 @@
 
 class WarningsTest extends PHPUnit\Framework\TestCase {
 
+    protected function setUp() {
+        Config::setCountry('UK');
+    }
+
     public function test_warnings_for_country() {
         $rss_xml =
             '<?xml version="1.0" encoding="utf-8" ?>' .
@@ -45,6 +49,7 @@ class WarningsTest extends PHPUnit\Framework\TestCase {
         $testee = new Warnings($rss);
         $serialized = $testee->serialize();
 
+        $this->assertSame('UK', $serialized['country']);
         $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK.html', $serialized['link']);
         $this->assertSame(2, sizeof($serialized['regions']));
         $this->assertSame('Dumfries and Galloway', $serialized['regions'][0]['name']);
@@ -77,6 +82,7 @@ class WarningsTest extends PHPUnit\Framework\TestCase {
         $testee = new Warnings($rss);
         $serialized = $testee->serialize();
 
+        $this->assertSame('UK', $serialized['country']);
         $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK002.html', $serialized['link']);
         $this->assertSame(1, sizeof($serialized['regions']));
         $this->assertSame('Highlands & Islands', $serialized['regions'][0]['name']);

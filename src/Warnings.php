@@ -45,6 +45,7 @@ class Warnings {
         }
 
         return [
+            'country' => Config::getCountry(),
             'link' => $this->link,
             'regions' => $regions
         ];
