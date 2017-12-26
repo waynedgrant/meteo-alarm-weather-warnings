@@ -34,7 +34,7 @@ class AwarenessTest extends PHPUnit\Framework\TestCase {
         $testee = new Awareness($awareness_cell);
         $serialized = $testee->serialize();
 
-        $this->assertSame(AwarenessType::NONE, $serialized['awareness_type']['type']);
+        $this->assertSame(AwarenessType::NO_WARNINGS, $serialized['awareness_type']['type']);
         $this->assertSame(AwarenessLevel::GREEN, $serialized['awareness_level']['level']);
     }
 }

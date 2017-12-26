@@ -6,11 +6,11 @@
 class AwarenessTypeTest extends PHPUnit\Framework\TestCase {
 
     public function test_none() {
-        $testee = new AwarenessType(AwarenessType::NONE);
+        $testee = new AwarenessType(AwarenessType::NO_WARNINGS);
         $serialized = $testee->serialize();
 
         $this->assertSame(0, $serialized['type']);
-        $this->assertSame("None", $serialized['description']);
+        $this->assertSame("No Warnings", $serialized['description']);
     }
 
     public function test_wind() {

@@ -5,7 +5,7 @@
 
 class AwarenessType {
 
-    const NONE = 0;
+    const NO_WARNINGS = 0;
     const WIND = 1;
     const SNOW_ICE = 2;
     const THUNDERSTORMS = 3;
@@ -21,7 +21,7 @@ class AwarenessType {
     const RAIN_FLOODING = 13;
 
     private $descriptions = [
-        'None',
+        'No Warnings',
         'Wind',
         'Snow/Ice',
         'Thunderstorms',

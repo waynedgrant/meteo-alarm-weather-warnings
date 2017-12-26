@@ -9,7 +9,7 @@ class Period {
 
     public function __construct($period_cell) {
         /* e.g. <td><b>From: </b><i>10.12.2017 05:00 CET</i><b> Until: </b><i>11.12.2017 00:55 CET</i></td>
-             or <td /> if there is no period, i.e. when awareness level == NONE */
+             or <td /> if there is no period, i.e. when awareness level == NO_WARNINGS */
 
         if (trim($period_cell->textContent) !== '') {
             $from_date_text = $period_cell->getElementsByTagName('i')->item(0)->textContent;
