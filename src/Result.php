@@ -15,10 +15,6 @@ class Result {
     }
 
     public function serialize() {
-        foreach ($this->regions as $region) {
-            $regions[] = $region->serialize();
-        }
-
         return [
             'endpoint' => [
                 'url' => $this->createServiceUrl(),
