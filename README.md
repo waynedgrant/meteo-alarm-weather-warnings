@@ -12,7 +12,7 @@ JSON formatted Web Service API to fetch weather warnings from [Metoalarm](http:/
 
 **meteo-alarm-weather-warnings** remedies this by providing a simple JSON formatted Web Service API that proxies through to Meteoalarm's RSS feeds.
 
-TODO - image of output
+![alt tag](meteo-alarm-weather-warnings.png)
 
 **meteo-alarm-weather-warnings** especially useful for integrating weather warnings into a 3rd-party website (as has been done here for several UK regions: [https://waynedgrant.com/weather/warn.html](https://waynedgrant.com/weather/warn.html)).
 
