@@ -73,7 +73,7 @@ Weather warnings for Germany with a specialized date/time format expressed in th
 
 An example of a successful reply:
 
-```json
+```
 {
     "endpoint": {
         "url": "https://waynedgrant.com/weather/warnings/warnings.json?country=UK",
@@ -108,17 +108,17 @@ An example of a successful reply:
                         "description": "Some very strong winds are expected over parts of Northern Ireland and southwest Scotland on New Years Eve. There will probably be some damage to buildings such as tiles blown from roofs, with flying debris likely with the possibility of injuries or danger to life. In coastal areas large waves are likely as well as beach material being thrown onto coastal roads, sea fronts and perhaps some properties. Longer journey times and cancellations are likely as road, rail, air and ferry services may be affected. Some roads and bridges are likely to close. There is also a good chance of power cuts and the potential to affect other services such as mobile phone coverage."
                     },
 
-                    /* ... any other warnings for today ... */
+                    ... any other warnings for today ...
                 ],
                 "tomorrow": [
                     {
-                        /* ... warnings for tomorrow ... */
+                        ... warnings for tomorrow ...
                     }
                 ],
                 "published": "Sunday 00:00 GMT"
             },
             {
-                /* ... other regions ... */
+                ... other regions ...
             }
         ]
     }
@@ -138,7 +138,7 @@ TODO
 An example of a failure reply:
 
 
-```json
+```
 {
     "error": "GET parameter country is required"
 }
