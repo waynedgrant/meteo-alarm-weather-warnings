@@ -24,11 +24,11 @@ JSON formatted Web Service API to fetch weather warnings from [Metoalarm](http:/
 AddHandler application/x-httpd-php5 .json
 ```
 
-* Alternatively rename the **warning.json** file to be named **warning.php**.
+* Alternatively rename the **warnings.json** file to be called **warnings.php**.
 
 ## Execution
 
-Hit the URL of your deployed **warning.json** file using a web browser or other REST client. Both JSON and JSONP are supported.
+Hit the URL of your deployed **warnings.json** file using a web browser or other REST client. Both JSON and JSONP are supported.
 
 The following GET parameters are supported:
 
@@ -56,7 +56,7 @@ Weather warnings for the Gelderland region of the Netherlands:
 Weather warnings for Germany with a specialized date/time format expressed in the local timezone:
 
 ```
-/warnings.json?country=DE&date_time_format=Y/M/d H:i T&time_zone=Europe/Berlin
+/warnings.json?country=DE&date_time_format=Y/M/d%20H:i%20T&time_zone=Europe/Berlin
 ```
 
 ## Response Fields
