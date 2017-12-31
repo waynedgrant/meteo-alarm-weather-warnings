@@ -14,7 +14,7 @@ JSON formatted Web Service API to fetch weather warnings from [Metoalarm](http:/
 
 ![alt tag](meteo-alarm-weather-warnings.png)
 
-**meteo-alarm-weather-warnings** especially useful for integrating weather warnings into a 3rd-party website (as has been done here for several UK regions: [https://waynedgrant.com/weather/warn.html](https://waynedgrant.com/weather/warn.html)).
+**meteo-alarm-weather-warnings** is especially useful for integrating weather warnings into a 3rd-party website (as has been done here for several UK regions: [https://waynedgrant.com/weather/warn.html](https://waynedgrant.com/weather/warn.html)).
 
 ## Requirements
 
