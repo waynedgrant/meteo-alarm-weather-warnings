@@ -166,7 +166,7 @@ Example of failure replies:
 
 ```
 {
-"error": "Response code 404 returned by http://www.meteoalarm.eu/documents/rss/NARNIA.rss"
+    "error": "Response code 404 returned by http://www.meteoalarm.eu/documents/rss/NARNIA.rss"
 }
 ```
 
