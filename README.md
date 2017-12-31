@@ -32,7 +32,7 @@ JSON formatted Web Service API to fetch weather warnings from [Metoalarm](http:/
 AddHandler application/x-httpd-php5 .json
 ```
 
-* Alternatively rename the **warnings.json** file to be called **warnings.php**.
+* Alternatively rename the **warnings.json** file to be called **warnings.php**
 
 ## Execution
 
@@ -45,7 +45,7 @@ The following GET parameters are supported:
 | country          | Country to fetch weather warnings for. e.g. UK, DE, FR, etc. See [Metoalarm](http://www.meteoalarm.eu/) for a full list of countries.                                | Yes       | N/A                    |
 | region           | Region within country to fetch weather warnings for, e.g. 004 is Lothian & Borders in the UK. See [Metoalarm](http://www.meteoalarm.eu/) for a full list of regions. | No        | All regions in country |
 | date_time_format | Format string to use for fetched date/time values. See [datetime.createfromformat.php](http://php.net/manual/en/datetime.createfromformat.php) for details.          | No        | l H:i T                |
-| time_zone        | Timezone used to express for fetched date/time values. See [timezones.php](http://php.net/manual/en/timezones.php) for a full list of supported values.              | No        | Europe/London          |
+| time_zone        | Timezone used to express fetched date/time values. See [timezones.php](http://php.net/manual/en/timezones.php) for a full list of supported values.                  | No        | Europe/London          |
 
 For example:
 
