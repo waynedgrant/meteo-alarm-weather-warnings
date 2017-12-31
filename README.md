@@ -127,16 +127,36 @@ An example of a successful reply:
 
 #### Awareness Types
 
-TODO
+| Code | Type                     |
+|------|--------------------------|
+| 0    | No Warnings              |
+| 1    | Wind                     |
+| 2    | Snow/Ice                 |
+| 3    | Thunderstorms            |
+| 4    | Fog                      |
+| 5    | xtreme High Temperatures |
+| 6    | Extreme Low Temperatures |
+| 7    | Costal Event             |
+| 8    | Forest Fire              |
+| 9    | Avalanche                |
+| 10   | Rain                     |
+| 11   | Unavailable              |
+| 12   | Flooding                 |
+| 13   | Rain/Flooding            |
 
 #### Awareness Levels
 
-TODO
+| Code | Level             |
+|------|-------------------|
+| 0    | White/Unknown     |
+| 1    | Green/No Warnings |
+| 2    | Yellow            |
+| 3    | Amber             |
+| 4    | Red               |
 
 ### Failure
 
-An example of a failure reply:
-
+Example of failure replies:
 
 ```
 {
@@ -144,6 +164,11 @@ An example of a failure reply:
 }
 ```
 
+```
+{
+"error": "Response code 404 returned by http://www.meteoalarm.eu/documents/rss/NARNIA.rss"
+}
+```
 
 ## Unit Testing
 
