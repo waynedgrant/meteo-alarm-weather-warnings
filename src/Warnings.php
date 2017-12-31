@@ -9,10 +9,9 @@ class Warnings {
         /* e.g.
             <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
             	<channel>
-            		<link>http://web.meteoalarm.eu/en_UK/0/0/UK.html</link>
             		<item>
             			<title>United Kingdom</title>
-            			<...
+            			...
             		</item>
             		<item>
             			<title>Dumfries and Galloway</title>
@@ -46,7 +45,6 @@ class Warnings {
 
         return [
             'country' => Config::getCountry(),
-            'link' => $this->link,
             'regions' => $regions
         ];
     }
