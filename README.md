@@ -8,6 +8,12 @@ JSON formatted Web Service API to fetch weather warnings from [Metoalarm](http:/
 
 ## Overview
 
+[Metoalarm](http://www.meteoalarm.eu/) is a web site that provides up-to-date weather warnings for most of Europe. While it provides a useful website and RSS feeds it does not, at the time of writing, provide a web service interface.
+
+**meteo-alarm-weather-warnings** remedies this by providing a simple JSON formatted Web Service API that proxies through to Meteoalarm's RSS feeds.
+
+This is especially useful for integrating weather warnings into a 3rd-party website (as has been done here for several UK regions: [https://waynedgrant.com/weather/warn.html](https://waynedgrant.com/weather/warn.html)).
+
 ## Requirements
 
 1. PHP version 5 or above installed on the web server
