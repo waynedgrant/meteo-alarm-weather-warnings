@@ -73,7 +73,7 @@ Weather warnings for Germany with a specialized date/time format expressed in th
 
 An example of a successful reply:
 
-```
+```json
 {
     "endpoint": {
         "url": "https://waynedgrant.com/weather/warnings/warnings.json?country=UK",
@@ -138,7 +138,7 @@ TODO
 An example of a failure reply:
 
 
-```
+```json
 {
     "error": "GET parameter country is required"
 }
