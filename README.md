@@ -12,7 +12,9 @@ JSON formatted Web Service API to fetch weather warnings from [Metoalarm](http:/
 
 **meteo-alarm-weather-warnings** remedies this by providing a simple JSON formatted Web Service API that proxies through to Meteoalarm's RSS feeds.
 
-This is especially useful for integrating weather warnings into a 3rd-party website (as has been done here for several UK regions: [https://waynedgrant.com/weather/warn.html](https://waynedgrant.com/weather/warn.html)).
+TODO - image of output
+
+**meteo-alarm-weather-warnings** especially useful for integrating weather warnings into a 3rd-party website (as has been done here for several UK regions: [https://waynedgrant.com/weather/warn.html](https://waynedgrant.com/weather/warn.html)).
 
 ## Requirements
 
@@ -66,6 +68,82 @@ Weather warnings for Germany with a specialized date/time format expressed in th
 ```
 
 ## Response Fields
+
+### Success Response
+
+An example of a successful reply:
+
+```
+{
+    "endpoint": {
+        "url": "https://waynedgrant.com/weather/warnings/warnings.json?country=UK",
+        "version": "1.0",
+        "github_project": "https://github.com/waynedgrant/meteo-alarm-weather-warnings",
+        "copyright": "Copyright © 2018 Wayne D Grant (www.waynedgrant.com)"
+    },
+    "warnings": {
+        "country": "UK",
+        "regions": [
+            {
+                "name": "Dumfries and Galloway",
+                "code": "006",
+                "link": "http://web.meteoalarm.eu/en_UK/0/0/UK006.html",
+                "today": [
+                    {
+                        "awareness": {
+                            "awareness_type": {
+                                "type": 1,
+                                "description": "Wind"
+                            },
+                            "awareness_level": {
+                                "level": 3,
+                                "colour": "Amber",
+                                "description": "The weather is dangerous. Unusual meteorological phenomena have been forecast. Damage and casualties are likely to happen. Be very vigilant and keep regularly informed about the detailed expected meteorological conditions. Be aware of the risks that might be unavoidable. Follow any advice given by your authorities."
+                            }
+                        },
+                        "period": {
+                            "from": "Sunday 03:00 GMT",
+                            "until": "Sunday 12:00 GMT"
+                        },
+                        "description": "Some very strong winds are expected over parts of Northern Ireland and southwest Scotland on New Years Eve. There will probably be some damage to buildings such as tiles blown from roofs, with flying debris likely with the possibility of injuries or danger to life. In coastal areas large waves are likely as well as beach material being thrown onto coastal roads, sea fronts and perhaps some properties. Longer journey times and cancellations are likely as road, rail, air and ferry services may be affected. Some roads and bridges are likely to close. There is also a good chance of power cuts and the potential to affect other services such as mobile phone coverage."
+                    },
+
+                    ... any other warnings for today ...
+                ],
+                "tomorrow": [
+                    {
+                        ... warnings for tomorrow ...
+                    }
+                ],
+                "published": "Sunday 00:00 GMT"
+            },
+            {
+                ... other regions ...
+            }
+        ]
+    }
+}
+```
+
+#### Awareness Types
+
+TODO
+
+#### Awareness Levels
+
+TODO
+
+### Failure
+
+An example of a failure reply:
+
+
+```
+{
+    "error": "GET parameter country is required"
+}
+```
+
 
 ## Unit Testing
 
