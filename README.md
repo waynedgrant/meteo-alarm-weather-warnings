@@ -154,9 +154,9 @@ An example of a successful reply:
 | 3    | Amber             |
 | 4    | Red               |
 
-### Failure
+### Failure Response
 
-Example of failure replies:
+Examples of failure replies:
 
 ```
 {
