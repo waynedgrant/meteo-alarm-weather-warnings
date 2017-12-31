@@ -15,16 +15,23 @@ require_once("Period.php");
 require_once("Description.php");
 
 parse_parameters();
-$rss = fix_rss_ampersand_escaping(file_get_contents(generate_rss_link())); // TODO check for HTTP errors from file_get_contents
+$rss_link = generate_rss_link();
+$rss = @file_get_contents($rss_link);
+
+if (!$rss) {
+    $response_code = parse_response_code($http_response_header);
+    respond($response_code, create_error_json('Response code ' . $response_code . ' returned by ' . $rss_link));
+}
+
+$rss = fix_rss_ampersand_escaping($rss);
 $result = new Result(simplexml_load_string($rss));
 $json = json_encode($result->serialize());
 
-echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
+respond(200, $json);
 
 function parse_parameters() {
-    if (!isset($_GET['country'])) { // TODO - more informative error reporting
-        http_response_code(400);
-        die();
+    if (!isset($_GET['country'])) {
+        respond(400, create_error_json('GET parameter country is required'));
     }
 
     Config::setCountry(strtoupper($_GET['country']));
@@ -52,12 +59,34 @@ function generate_rss_link() {
     }
 }
 
+function parse_response_code($headers) {
+    foreach ($headers as $k=>$v) {
+        if (preg_match( "#HTTP/[0-9\.]+\s+([0-9]+)#", $v, $out)) {
+            $response_code = intval($out[1]);
+            break;
+        }
+    }
+    return $response_code;
+}
+
 function fix_rss_ampersand_escaping($rss) {
     /* Some ampersands are escaped in the received RSS and some are not.
        Address this by escaping them all and then fixing any resultant double escapes */
     $rss = str_replace('&', '&amp;', $rss);
     $rss = str_replace('&amp;amp;', '&amp;', $rss);
     return $rss;
+}
+
+function create_error_json($error_message) {
+    return json_encode(array(
+        'error' => $error_message
+    ));
+}
+
+function respond($code, $json) {
+    header('Status: ' . $code);
+    echo isset($_GET['callback']) ? "{$_GET['callback']}($json)" : $json;
+    die();
 }
 
 ?>
