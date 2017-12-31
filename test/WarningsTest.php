@@ -50,7 +50,6 @@ class WarningsTest extends PHPUnit\Framework\TestCase {
         $serialized = $testee->serialize();
 
         $this->assertSame('UK', $serialized['country']);
-        $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK.html', $serialized['link']);
         $this->assertSame(2, sizeof($serialized['regions']));
         $this->assertSame('Dumfries and Galloway', $serialized['regions'][0]['name']);
         $this->assertSame('Lothian & Borders', $serialized['regions'][1]['name']);
@@ -83,7 +82,6 @@ class WarningsTest extends PHPUnit\Framework\TestCase {
         $serialized = $testee->serialize();
 
         $this->assertSame('UK', $serialized['country']);
-        $this->assertSame('http://web.meteoalarm.eu/en_UK/0/0/UK002.html', $serialized['link']);
         $this->assertSame(1, sizeof($serialized['regions']));
         $this->assertSame('Highlands & Islands', $serialized['regions'][0]['name']);
     }
