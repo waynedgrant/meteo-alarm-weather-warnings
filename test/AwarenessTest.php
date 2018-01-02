@@ -17,6 +17,7 @@ class AwarenessTest extends PHPUnit\Framework\TestCase {
         $testee = new Awareness($awareness_cell);
         $serialized = $testee->serialize();
 
+        $this->assertSame('http://web.meteoalarm.eu/documents/rss/wflag-l3-t2.jpg', $serialized['icon']);
         $this->assertSame(AwarenessType::SNOW_ICE, $serialized['awareness_type']['type']);
         $this->assertSame(AwarenessLevel::AMBER, $serialized['awareness_level']['level']);
     }

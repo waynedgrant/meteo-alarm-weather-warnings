@@ -6,8 +6,13 @@
 class Awareness {
 
     public function __construct($awareness_cell) {
-        // e.g. <td><img src="..." alt="awt:4 level:3"></td>
-        $img_alt = $awareness_cell->getElementsByTagName('img')->item(0)->getAttribute('alt');
+        // e.g. <td><img src="http://web.meteoalarm.eu/documents/rss/wflag-l3-t4.jpg" alt="awt:4 level:3"></td>
+        $img = $awareness_cell->getElementsByTagName('img')->item(0);
+
+        $this->icon = $img->getAttribute('src');
+
+        $img_alt = $img->getAttribute('alt');
+
         $this->parse_awareness_level($img_alt);
         $this->parse_awareness_type($img_alt);
     }
@@ -32,6 +37,7 @@ class Awareness {
 
     public function serialize() {
         return [
+            'icon' => $this->icon,
             'awareness_type' => $this->awarenessType->serialize(),
             'awareness_level' => $this->awarenessLevel->serialize()
         ];
