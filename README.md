@@ -77,7 +77,7 @@ An example of a successful reply:
 {
     "endpoint": {
         "url": "https://waynedgrant.com/weather/warnings/warnings.json?country=UK",
-        "version": "1.0",
+        "version": "1.1",
         "github_project": "https://github.com/waynedgrant/meteo-alarm-weather-warnings",
         "copyright": "Copyright © 2018 Wayne D Grant (www.waynedgrant.com)"
     },
@@ -91,6 +91,7 @@ An example of a successful reply:
                 "today": [
                     {
                         "awareness": {
+                            "icon": "http://web.meteoalarm.eu/documents/rss/wflag-l3-t1.jpg",
                             "awareness_type": {
                                 "type": 1,
                                 "description": "Wind"
