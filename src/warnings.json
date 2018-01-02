@@ -23,6 +23,8 @@ if (!$rss) {
     respond($response_code, create_error_json('Response code ' . $response_code . ' returned by ' . $rss_link));
 }
 
+$rss = mb_convert_encoding($rss, 'HTML-ENTITIES', 'UTF-8'); // Convert special European chars such as French accents and German umlauts appropriately
+
 $rss = fix_rss_ampersand_escaping($rss);
 $result = new Result(simplexml_load_string($rss));
 $json = json_encode($result->serialize());
