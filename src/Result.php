@@ -2,7 +2,7 @@
 
 class Result {
 
-    const SERVICE_VERSION = '1.0';
+    const SERVICE_VERSION = '1.1';
     const GITHUB_PROJECT_LINK = 'https://github.com/waynedgrant/meteo-alarm-weather-warnings';
     const COPYRIGHT_NOTICE = 'Copyright © 2018 Wayne D Grant (www.waynedgrant.com)';
 
