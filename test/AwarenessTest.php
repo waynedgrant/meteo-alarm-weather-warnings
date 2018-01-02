@@ -26,7 +26,7 @@ class AwarenessTest extends PHPUnit\Framework\TestCase {
         // Any awareness type other than 'None' makes no sense when level is 'Green'
         $awareness_html =
             '<td width="28">' .
-                '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l2-t2.jpg" alt="awt:3 level:1">' .
+                '<img border="1" src="http://web.meteoalarm.eu/documents/rss/wflag-l1-t3.jpg" alt="awt:3 level:1">' .
             '</td>';
 
         $awareness_dom = DOMDocument::loadHTML($awareness_html);
@@ -35,6 +35,7 @@ class AwarenessTest extends PHPUnit\Framework\TestCase {
         $testee = new Awareness($awareness_cell);
         $serialized = $testee->serialize();
 
+        $this->assertSame('http://web.meteoalarm.eu/documents/rss/wflag-l1-t3.jpg', $serialized['icon']);
         $this->assertSame(AwarenessType::NO_WARNINGS, $serialized['awareness_type']['type']);
         $this->assertSame(AwarenessLevel::GREEN, $serialized['awareness_level']['level']);
     }
