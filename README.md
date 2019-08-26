@@ -76,7 +76,7 @@ An example of a successful reply:
 ```
 {
     "endpoint": {
-        "url": "https://waynedgrant.com/weather/warnings/warnings.json?country=UK",
+        "url": "...",
         "version": "1.1",
         "github_project": "https://github.com/waynedgrant/meteo-alarm-weather-warnings",
         "copyright": "Copyright © 2018 Wayne D Grant (www.waynedgrant.com)"
