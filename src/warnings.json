@@ -62,12 +62,20 @@ function generate_rss_link() {
 }
 
 function parse_response_code($headers) {
-    foreach ($headers as $k=>$v) {
-        if (preg_match( "#HTTP/[0-9\.]+\s+([0-9]+)#", $v, $out)) {
-            $response_code = intval($out[1]);
-            break;
+
+    // If we don't get parseable headers we assume we have an invalid reponse from the meteoalarm server
+    $response_code = 502;
+
+    if (is_array($headers)) {
+
+        foreach ($headers as $k=>$v) {
+            if (preg_match( "#HTTP/[0-9\.]+\s+([0-9]+)#", $v, $out)) {
+                $response_code = intval($out[1]);
+                break;
+            }
         }
     }
+
     return $response_code;
 }
 
